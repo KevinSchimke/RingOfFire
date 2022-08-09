@@ -8,6 +8,7 @@ import { Game } from 'src/models/game';
 })
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
+  currentCard?: string = ''; //Kevin edit from currentCard: string = ''; to currentCard?: string = ''; undefined
   game!: Game; // Kevin edit from game: Game; to game!: Game;
 
   constructor() { }
@@ -22,6 +23,17 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    this.takeCardAnimation = true;
+    if (!this.takeCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      console.log(this.currentCard);
+      this.takeCardAnimation = true;
+
+      setTimeout(() => {
+        this.game.playedCards.push(this.currentCard + ''); // Kevin is not a string
+        this.takeCardAnimation = false;
+      }, 1000);
+    }
+
+
   }
 }

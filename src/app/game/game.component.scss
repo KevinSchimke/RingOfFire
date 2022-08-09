@@ -32,6 +32,11 @@
     transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
 }
 
+.played_card{
+    right: 25px;
+    transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
+}
+
 @keyframes take_card_animation {
     0% {
         transform: scale(1);
