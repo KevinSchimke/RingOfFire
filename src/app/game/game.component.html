@@ -1,5 +1,10 @@
 <div class="game_field">
     <div class="card_stack">
-        <img [ngStyle]="{'right.px': i*5}" *ngFor="let card of [0,1,2,3,4]; let i = index;" src="./../../assets/cards/red_back.png">
+        <img [ngStyle]="{'right.px': i*5}" *ngFor="let card of [0,1,2,3]; let i = index;"
+            src="./../../assets/cards/red_back.png">
+        <img (click)="takeCard()" class="top_card" style="right: 25px;"
+            src="./../../assets/cards/red_back.png">
+        <img (click)="takeCard()" *ngIf="takeCardAnimation" class="take_card" style="right: 25px;"
+            src="./../../assets/cards/spade_1.png">
     </div>
 </div>
