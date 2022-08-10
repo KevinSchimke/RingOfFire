@@ -37,6 +37,11 @@
     transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
 }
 
+.player_position {
+    position: absolute;
+    right: 0;
+}
+
 @keyframes take_card_animation {
     0% {
         transform: scale(1);

@@ -8,17 +8,12 @@ import { Game } from 'src/models/game';
 })
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
-  currentCard?: string = ''; //Kevin edit from currentCard: string = ''; to currentCard?: string = ''; undefined
-  game!: Game; // Kevin edit from game: Game; to game!: Game;
+  currentCard?: string = '';
+  game =  new Game();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.newGame();
-  }
-
-  newGame() {
-    this.game = new Game();
     console.log(this.game);
   }
 
@@ -29,11 +24,9 @@ export class GameComponent implements OnInit {
       this.takeCardAnimation = true;
 
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard + ''); // Kevin is not a string
+        this.game.playedCards.push(this.currentCard + '');
         this.takeCardAnimation = false;
       }, 1000);
     }
-
-
   }
 }
