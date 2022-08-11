@@ -48,6 +48,13 @@
     bottom: 32px;
 }
 
+.game_info {
+    position: absolute;
+    bottom: 32px;
+    left: 120px;
+    right: 120px;
+}
+
 @keyframes take_card_animation {
     0% {
         transform: scale(1);
