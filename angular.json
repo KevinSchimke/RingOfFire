@@ -9,11 +9,9 @@
         "@schematics/angular:component": {
           "style": "scss"
         },
-
         "@schematics/angular:application": {
           "strict": true
         }
-        
       },
       "root": "",
       "sourceRoot": "src",
@@ -106,6 +104,16 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "RingOfFire:build:production",
+            "firebaseProject": "ring-of-fire-19bda",
+            "firebaseHostingSite": "ring-of-fire-19bda"
           }
         }
       }
