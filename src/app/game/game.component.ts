@@ -2,18 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { Firestore, collectionData, collection, setDoc, doc } from '@angular/fire/firestore';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
+
 export class GameComponent implements OnInit {
   takeCardAnimation = false;
   currentCard?: string = '';
   game = new Game();
+  games$: Observable<any>;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private firestore: Firestore, public dialog: MatDialog) {
+    const coll = collection(firestore, 'games');
+    this.games$ = collectionData(coll);
+    this.games$.subscribe( (game) => {
+      console.log('Game update:', game);
+      // this.game = game;
+    });
+   }
+
+
+
+
+
+
 
   ngOnInit(): void {
     console.log(this.game);
