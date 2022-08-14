@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collectionData, collection, setDoc, doc } from '@angular/fire/firestore';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore, collectionData, collection, setDoc, doc, onSnapshot, docData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -16,26 +16,71 @@ export class GameComponent implements OnInit {
   takeCardAnimation = false;
   currentCard?: string = '';
   game = new Game();
-  games$: Observable<any>;
+  games$?: Observable<any>;
+  gameID: string = '';
 
-  constructor(private firestore: Firestore, public dialog: MatDialog) {
-    const coll = collection(firestore, 'games');
-    this.games$ = collectionData(coll);
-    this.games$.subscribe( (game) => {
-      console.log('Game update:', game);
-      // this.game = game;
-    });
-   }
-
-
-
-
-
-
+  constructor(private route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.game);
+
+    this.route.params.subscribe(params => {
+
+      this.gameID = params['id'];
+
+      /*
+      Collection ID 
+
+      D8bTKKk4B5iJOjAj83tB - Spiel Database
+
+      MNnqgPoO57cyKawYYz9I - Test Database
+
+      bEYIotJ3Dd3pxjLxIcJQ - Test Database
+
+      */
+
+      /*Funktioniert*/
+      onSnapshot(doc(this.firestore, 'games', params['id']), (doc) => {
+        const loadFirebaseGame: any = doc.data();
+        console.log('Firestore game onSnapshot', loadFirebaseGame);
+      });
+
+      /*Zeigt nicht das gewünschte Json an*/
+      const coll = doc(this.firestore, 'games', params['id']);
+      console.log('Firestore game doc', coll);
+
+      /*Funktioniert läd aber alle dokumente und nicht mit der gameID*/
+      const allColl = collection(this.firestore, 'games');
+      this.games$ = collectionData(allColl);
+      this.games$.subscribe((game) => {
+        console.log('Firestore game Collection', game);
+      });
+
+    });
+
+    /*Funktioniert - neue Collection wird angelegt*/
+
+    // const coll = collection(this.firestore, 'games');
+    // setDoc(doc(coll), {name: this.game.editGametoJSON()});
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   takeCard() {
     if (!this.takeCardAnimation && this.game.players.length >= 1) {
