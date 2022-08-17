@@ -10,12 +10,12 @@
         <!-- Played Cards Stack -->
         <img *ngFor="let card of game.playedCards" class="played_card" src="assets/cards/{{ card }}.png">
         <!-- Current Card Animation -->
-        <img (click)="takeCard()" *ngIf="takeCardAnimation" class="take_card" style="right: 25px;"
-            src="assets/cards/{{ currentCard }}.png">
+        <img (click)="takeCard()" *ngIf="game.takeCardAnimation" class="take_card" style="right: 25px;"
+            src="assets/cards/{{ game.currentCard }}.png">
     </div>
 </div>
 
-<app-game-info [card]="currentCard" class="game_info"></app-game-info>
+<app-game-info [card]="this.game.currentCard" class="game_info"></app-game-info>
 
 <button (click)="openDialog()" class="button_add" mat-fab color="primary"
     aria-label="Example icon button with a delete icon">

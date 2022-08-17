@@ -13,28 +13,26 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 
 export class GameComponent implements OnInit {
-  takeCardAnimation = false;
-  currentCard?: string = '';
   game: Game;
-  gameID: string ='';
+  gameID: string = '';
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((params) => {
-      console.log(params);
       this.gameID = params['id']
       this.firestore.
         collection('games')
         .doc(this.gameID)
         .valueChanges()
         .subscribe((game: any) => {
-          console.log(game);
           this.game.currentPlayer = game.currentPlayer;
           this.game.playedCards = game.playedCards;
           this.game.players = game.players;
           this.game.stack = game.stack;
+          this.game.currentCard = game.currentCard;
+          this.game.takeCardAnimation = game.takeCardAnimation;
         })
     })
 
@@ -45,17 +43,26 @@ export class GameComponent implements OnInit {
     this.game = new Game();
   }
 
+  saveGame() {
+    this.firestore
+      .collection('games')
+      .doc(this.gameID)
+      .update(this.game.editGametoJSON())
+  }
+
   takeCard() {
-    if (!this.takeCardAnimation && this.game.players.length >= 1) {
-      this.currentCard = this.game.stack.pop();
-      this.takeCardAnimation = true;
+    if (!this.game.takeCardAnimation && this.game.players.length >= 1) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.takeCardAnimation = true;
+
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-
+      this.saveGame();
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard + '');
-        this.takeCardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard + '');
+        this.game.takeCardAnimation = false;
+        this.saveGame();
       }, 1000);
     } else {
       alert("Please Add a Player");
@@ -68,6 +75,7 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe(name => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.saveGame();
       }
     });
   }
