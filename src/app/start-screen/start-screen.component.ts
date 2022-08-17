@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   newGame(){
-    this.router.navigateByUrl('/game');
+    
   }
 }
