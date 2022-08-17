@@ -16,8 +16,7 @@ export class GameComponent implements OnInit {
   takeCardAnimation = false;
   currentCard?: string = '';
   game: Game;
-  games$?: Observable<any>;
-  gameID: string = '';
+  gameID: string ='';
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -25,9 +24,10 @@ export class GameComponent implements OnInit {
     this.newGame();
     this.route.params.subscribe((params) => {
       console.log(params);
+      this.gameID = params['id']
       this.firestore.
         collection('games')
-        .doc(params['id'])
+        .doc(this.gameID)
         .valueChanges()
         .subscribe((game: any) => {
           console.log(game);
@@ -43,10 +43,6 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-    // this.firestore
-    // .collection('games')
-    // .add(this.game.editGametoJSON());
-
   }
 
   takeCard() {
