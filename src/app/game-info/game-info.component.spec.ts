@@ -8,9 +8,9 @@ describe('GameInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameInfoComponent ]
+      declarations: [GameInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(GameInfoComponent);
     component = fixture.componentInstance;

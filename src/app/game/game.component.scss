@@ -1,4 +1,4 @@
-.game_field{
+.game_field {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
@@ -12,27 +12,29 @@
 
 .card_stack {
     position: relative;
+
     img {
         position: absolute;
         width: 120px;
     }
 }
 
-.top_card{
-    
+.top_card {
+
     transition: all 125ms ease-in-out;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
         transform: scale(1.1) translateY(-10px);
     }
 }
 
-.take_card{
+.take_card {
     animation: take_card_animation 1.25s ease-in-out;
     transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
 }
 
-.played_card{
+.played_card {
     right: 25px;
     transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
 }
@@ -46,6 +48,11 @@
     position: absolute;
     right: 32px;
     bottom: 32px;
+
+    @media (max-width: 800px) {
+        right: 12px;
+        bottom: 12px;
+    }
 }
 
 .game_info {
@@ -53,18 +60,42 @@
     bottom: 32px;
     left: 120px;
     right: 120px;
+
+    @media (max-width: 800px) {
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
+.scroll_container{
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    
+}
+
+.app-player-mobile{
+    margin-left: 8px;
+}
 @keyframes take_card_animation {
     0% {
         transform: scale(1);
     }
+
     30% {
         transform: scale(1.7);
     }
+
     50% {
         transform: scale(1.7);
     }
+
     100% {
         transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
     }

@@ -8,9 +8,9 @@ describe('StartScreenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StartScreenComponent ]
+      declarations: [StartScreenComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(StartScreenComponent);
     component = fixture.componentInstance;
