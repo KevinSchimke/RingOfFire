@@ -1,0 +1,10 @@
+img {
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+
+    &:hover {
+        filter: brightness(0.9);
+        cursor: pointer;
+    }
+}
