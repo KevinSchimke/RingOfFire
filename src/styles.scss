@@ -12,6 +12,23 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #555; 
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888; 
+  }
+
 @media (max-width: 800px) {
     .hide-mobile {
         display: none !important;

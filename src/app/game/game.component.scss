@@ -39,11 +39,6 @@
     transform: scale(1.2) translateX(150px) translateY(-150px) rotate(-10deg);
 }
 
-.player_position {
-    position: absolute;
-    right: 0;
-}
-
 .button_add {
     position: absolute;
     right: 32px;
@@ -68,23 +63,32 @@
     }
 }
 
-.scroll_container {
+.scroll_container_vertical {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 150px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.scroll_container_horizontal {
     overflow-y: hidden;
     overflow-x: auto;
     display: flex;
     position: absolute;
+    max-height: 180px;
     left: 0;
     right: 0;
     top: 0;
-
-
+    transform: rotate(180deg);
 }
 
 .app-player-mobile {
     margin-left: 8px;
 }
 
-.app-player,
+.app-player-desktop,
 .app-player-mobile {
     cursor: pointer;
 

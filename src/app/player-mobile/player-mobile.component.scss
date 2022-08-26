@@ -2,11 +2,14 @@
     display: flex;
     flex-direction: column;
     width: 60px;
+    height: 80%;
+    justify-content: flex-end;
     align-items: center;
     background-color: rgba($color: rgb(128, 128, 128), $alpha: 0.6);
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     padding: 12px;
+    transform: rotate(180deg);
 
     span {
         font-size: 24px;
