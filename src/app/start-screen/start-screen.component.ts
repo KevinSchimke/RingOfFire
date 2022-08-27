@@ -17,6 +17,9 @@ export class StartScreenComponent implements OnInit {
 
   newGame() {
     let game = new Game();
+    let date = new Date();
+    game.gameTimeStamp = date.toString();
+    
     this.firestore
       .collection('games')
       .add(game.editGametoJSON())

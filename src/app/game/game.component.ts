@@ -36,15 +36,13 @@ export class GameComponent implements OnInit {
           this.game.takeCardAnimation = game.takeCardAnimation;
         })
     })
-
-
   }
 
   newGame() {
     this.game = new Game();
   }
 
-  saveGame() {
+  saveGame() {    
     this.firestore
       .collection('games')
       .doc(this.gameID)
@@ -55,7 +53,6 @@ export class GameComponent implements OnInit {
     if (!this.game.takeCardAnimation && this.game.players.length >= 1) {
       this.game.currentCard = this.game.stack.pop();
       this.game.takeCardAnimation = true;
-
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;

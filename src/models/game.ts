@@ -6,6 +6,8 @@ export class Game {
     public currentPlayer: number = 0;
     public takeCardAnimation = false;
     public currentCard: string = "";
+    public gameTimeStamp: string = "";
+
 
     constructor() {
         for (let index = 1; index < 14; index++) {
@@ -20,6 +22,7 @@ export class Game {
 
     public editGametoJSON(){
         return {
+            gameTimeStamp: this.gameTimeStamp,
             players: this.players,
             playerImages: this.playerImages,
             stack: this.stack,
