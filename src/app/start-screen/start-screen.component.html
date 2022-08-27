@@ -1,6 +1,12 @@
 <div class="start_screen">
-    <img src="assets/startbox.png">
-    <div class="start_label_box">
-        <img (click)="newGame()" src="assets/startlabel.png">
+    <img class="card_left" src="./../../assets/background/left.png">
+    <img class="card_right" src="./../../assets/background/right.png">
+    <div class="start_screen_middleBox">
+        <h1>Ring of Fire</h1>
+        <h2 (click)="newGame()">Starte ein neues Spiel</h2>
+        <h3>oder</h3>
+        <input (keyup)="checkGameID($event)" type="text" placeholder="Game ID einfügen">
+        <button mat-stroked-button (click)="openInputGame()">Spiel Laden</button>
+        
     </div>
 </div>

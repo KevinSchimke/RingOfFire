@@ -10,6 +10,7 @@ import { Game } from 'src/models/game';
 })
 export class StartScreenComponent implements OnInit {
 
+  inputGameID: string= "";
   constructor(private firestore: AngularFirestore, private router: Router) { }
 
   ngOnInit(): void {
@@ -26,6 +27,18 @@ export class StartScreenComponent implements OnInit {
       .then((gameInfo: any) => {
         this.router.navigate(['/game/' + gameInfo.id]);
       })
+  }
 
+  checkGameID(event: any){
+    this.inputGameID = event.target.value;
+  }
+
+  openInputGame(){
+    if(this.inputGameID.length == 20){
+      this.router.navigate(['/game/' + this.inputGameID]);
+    }else {
+      alert("Die eingegebene ID ist falsch");
+    }
+    
   }
 }
